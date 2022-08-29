@@ -1,24 +1,22 @@
 import { useState } from "react";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { BrowserRouter as Router, Link, Routes, Route } from "react-router-dom";
 
 const Menu = () => {
   const padding = {
     paddingRight: 5,
   };
   return (
-    <Router>
-      <div>
-        <Link style={padding} to="/">
-          anecdotes
-        </Link>
-        <Link style={padding} to="/">
-          create new
-        </Link>
-        <Link style={padding} to="/">
-          about
-        </Link>
-      </div>
-    </Router>
+    <div>
+      <Link style={padding} to="/">
+        anecdotes
+      </Link>
+      <Link style={padding} to="/create">
+        create new
+      </Link>
+      <Link style={padding} to="/about">
+        about
+      </Link>
+    </div>
   );
 };
 
@@ -154,14 +152,26 @@ const App = () => {
   };
 
   return (
-    <div>
+    // <div>
+    //   <h1>Software anecdotes</h1>
+    //   <Menu />
+    //   <AnecdoteList anecdotes={anecdotes} />
+    //   <About />
+    //   <CreateNew addNew={addNew} />
+    //   <Footer />
+    // </div>
+    <>
       <h1>Software anecdotes</h1>
-      <Menu />
-      <AnecdoteList anecdotes={anecdotes} />
-      <About />
-      <CreateNew addNew={addNew} />
-      <Footer />
-    </div>
+      <Router>
+        <Menu />
+        <Routes>
+          <Route path="/" element={<AnecdoteList anecdotes={anecdotes} />} />
+          <Route path="/create" element={<CreateNew />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+        <Footer />
+      </Router>
+    </>
   );
 };
 
