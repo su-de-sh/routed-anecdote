@@ -104,10 +104,14 @@ const CreateNew = (props) => {
       info: info.value,
       votes: 0,
     });
-    content.value = "";
-    author.value = "";
-    info.value = "";
+
     navigate("/");
+  };
+
+  const resetField = () => {
+    content.resetField();
+    author.resetField();
+    info.resetField();
   };
 
   return (
@@ -134,8 +138,9 @@ const CreateNew = (props) => {
           url for more info
           <input name="info" value={info.value} onChange={info.onChange} />
         </div>
-        <button>create</button>
+        <button type="submit">create</button>
       </form>
+      <button onClick={() => resetField()}>reset</button>
     </div>
   );
 };
